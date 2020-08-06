@@ -1,1 +1,0 @@
-document.getElementById("wrapper").textContent = "Hi";
