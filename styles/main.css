@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+#sidebar {
+    width: 220px;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    padding: 0;
+}
+
+#sidebar ul li {
+    list-style-type: none;
+    width: 100%;
+    padding: 20px;
+    background-color: #CCC;
+}
+
+#content {
+    width: 560px;
+    float: right;
+}
+
+#content p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
