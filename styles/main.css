@@ -1,5 +1,12 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    color: #EEE;
+}
+
+p {
+    color: #CCC;
+    line-height: 24px;
 }
 
 #container {
@@ -20,9 +27,20 @@ body {
 
 #sidebar ul li {
     list-style-type: none;
-    width: 100%;
     padding: 20px;
-    background-color: #CCC;
+    background-color: #C6A034;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#sidebar ul li:hover {
+    background-color: #F5E878;
+    border-left-color: #FC0827;
+    border-left-width: 5px;
+    padding-left: 15px;
+    border-left-style: solid;
+    color: black;
 }
 
 #content {
