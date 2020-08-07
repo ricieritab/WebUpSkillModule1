@@ -1,88 +1,86 @@
-let channels = {
-    "geography": [
-        {
-            "title": "Geography Now! LEBANON 🇱🇧",
-            "description": "whoa, 18 different religious groups all joined into one Arabic-speaking historical slot of land. Enjoy LEBANON!",
-            "video": "https://www.youtube.com/embed/vvgLLqpRT6s",
-        },
-        {
-            "title": "Geography Now! GREECE 🇬🇷",
-            "description": "whoa, 18 different religious groups all joined into one Arabic-speaking historical slot of land. Enjoy LEBANON!",
-            "video": "https://www.youtube.com/embed/Cp3yabqF4Uw",
-        },
-        {
-            "title": "Geography Now! SOUTH KOREA 🇰🇷",
-            "description": "Watch to the end before credits. As you know this episode was kind of important to me as I'm half Korean. My incredible mom makes a guest appearance. Oh and she can probably beat up your mom.",
-            "video": "https://www.youtube.com/embed/zTK119W8MBA",
-        },
-    ],
-    "science": [
-        {
-            "title": "The Egg - A Short Story",
-            "description": "The Egg - Story by Andy Weir, Animated by Kurzgesagt",
-            "video": "https://www.youtube.com/embed/h6fcK_fRYaI",
-        },
-        {
-            "title": "The Fermi Paradox - Where are all the aliens?",
-            "description": "The universe is unbelievably big – trillions of stars and even more planets. Soo… there just has to be life out there, right? But where is it? Why don’t we see any aliens? Where are they? And more importantly, what does this tell us about our own fate in this gigantic and scary universe?",
-            "video": "https://www.youtube.com/embed/sNhhvQGsMEc",
-        },
-        {
-            "title": "COVID-19",
-            "description": "The Coronavirus Explained & What You Should Do",
-            "video": "https://www.youtube.com/embed/BtN-goy9VOY",
-        },
-    ],
-    "live_music": [
-        {
-            "title": "ZHU @ Hakuba Iwatake in Nagano, Japan 🇯🇵 for Cercle",
-            "description": "ZHU playing an exclusive Blacklizt DJ set at Hakuba mountains in Japan for Cercle.",
-            "video": "https://www.youtube.com/embed/XHNHq1mC0VQ",
-        },
-        {
-            "title": "Solomun @ Théâtre Antique d'Orange in France 🇫🇷 for Cercle",
-            "description": "Solomun playing his unique DJ set in this amazing roman theater = Théâtre Antique d'Orange for Cercle.",
-            "video": "https://www.youtube.com/embed/QHDRRxKlimY",
-        },
-        {
-            "title": "ARTBAT @ Bondinho Pão de Açúcar in Rio de Janeiro 🇧🇷, Brazil for Cercle",
-            "description": "ARTBAT playing an exclusive DJ set at Bondinho Pão de Açúcar in Rio de Janeiro, Brazil for Cercle.",
-            "video": "https://www.youtube.com/embed/hENgrbIMiy4",
-        },
-    ],
-    "surfing": [
-        {
-            "title": "Surfistas exaltam a versatilidade das ondas de Noronha | Brazilian Storm",
-            "description": "Fernando de Noronha é palco da primeira etapa brasileira do WQS. É um momento de encontro de gerações porque a galera mais velha vai para se divertir e matar as saudades, enquanto os mais jovens vão para competir. Além das ondas, a beleza do lugar e as opções de lazer também atraem atletas de vários cantos do mundo até a ilha pernambucana.",
-            "video": "https://www.youtube.com/embed/uiVW3du-E1s",
-        },
-        {
-            "title": "Em busca do azul perfeito",
-            "description": "A relação entre @GabrielMedina e @CharlesMedina supera os limites do companheirismo, da amizade e do amor entre um pai e seu filho. Os dois compartilham o mesmo sonho e todo ano correm atrás dele, juntos. Foi assim que levaram a bandeira verde e amarela ao topo do mundo e fizeram história - duas vezes.",
-            "video": "https://www.youtube.com/embed/h1FBluoh0xI",
-        },
-        {
-            "title": "Nazaré BIGGEST Swell of the Year 🇵🇹",
-            "description": "Nazaré Big Wave Surf 2020",
-            "video": "https://www.youtube.com/embed/PVD77PvUZlA",
-        },
-    ]
-};
+// main.js
 
 function $(id) {
     return document.getElementById(id);
 }
 
-function addClickListenerTo(channel_name, _) {
-    let title = $("content_title");
-    let description = $("content_content");
-    let video = $("content_video");
+function createContentElement(node) {
 
-    let channel = $(channel_name);
-    channel.addEventListener('click', function() {
-        title.textContent = channels[channel_name][0]["title"];
-        video.setAttribute("src", channels[channel_name][0]["video"]);
-        description.textContent = channels[channel_name][0]["description"];
+    function createTitleElement(text) {
+        const element = document.createElement("h3");
+        element.textContent = text;
+        return element;
+    }
+
+    function createParagraphElement(text) {
+        const element = document.createElement("p");
+        element.textContent = text
+        return element;
+    }
+
+    function createArticleElement(paragraph) {
+        const element = document.createElement("article");
+        element.appendChild(paragraph);
+        return element;
+    }
+
+    function createVideoTitleElement() {
+        const element = document.createElement("h4");
+        element.textContent = "Watch 🎥";
+        return element;
+    }
+
+    function createVideoElement(video) {
+        const element = document.createElement("iframe");
+        element.src = video;
+        element.allowFullscreen = true;
+        element.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+        element.frameBorder = 0;
+        element.width = 560;
+        element.height = 315;
+        return element;
+    }
+
+    const title = createTitleElement(node.title);
+    const para = createParagraphElement(node.description);
+    const article = createArticleElement(para);
+    const videoTitle = createVideoTitleElement();
+    const video = createVideoElement(node.video);
+
+    const element = document.createElement("div");
+    element.className = "movie";
+    element.appendChild(title);
+    element.appendChild(article);
+    element.appendChild(videoTitle);
+    element.appendChild(video);
+
+    return element;
+}
+
+function clearStack() {
+    const stack = $("content");
+    stack.textContent = "";
+    // if (stack.hasChildNodes()) {
+    //     for (let i = 0; i < stack.childElementCount; i++) {
+    //         stack.removeChild(stack.childNodes[i]);
+    //     }
+    // }
+}
+
+function addVideoInStack(video, _) {
+    const stack = $("content");
+    const stackContent = createContentElement(video);
+    stack.appendChild(stackContent);
+}
+
+function changeChannel(channel_name) {
+    clearStack();
+    channels[channel_name].forEach(addVideoInStack);
+}
+
+function addClickListenerTo(channel_name, _) {
+    $(channel_name).addEventListener('click', function() {
+        changeChannel(channel_name);
     })
 }
 
@@ -91,3 +89,5 @@ let channelNames = [
 ];
 
 channelNames.forEach(addClickListenerTo);
+
+changeChannel("geography");
