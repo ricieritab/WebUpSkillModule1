@@ -60,11 +60,6 @@ function createContentElement(node) {
 function clearStack() {
     const stack = $("content");
     stack.textContent = "";
-    // if (stack.hasChildNodes()) {
-    //     for (let i = 0; i < stack.childElementCount; i++) {
-    //         stack.removeChild(stack.childNodes[i]);
-    //     }
-    // }
 }
 
 function addVideoInStack(video, _) {
